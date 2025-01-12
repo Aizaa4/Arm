@@ -1,0 +1,341 @@
+define g = Character("Greedy")
+define d = Character("DFS")
+define virslinijaspakreisi= Position(ypos=760,xalign=0.1)
+define virslinijaspalabi= Position(ypos=760,xalign=0.9)
+label start:
+    camera:
+        perspective True
+
+    scene bg parastais
+    with fade
+
+    show greedy happy at virslinijaspakreisi 
+    with easeinright
+    g "Es dzirdēju, ka tu vēlies iemācīties par programmēšanas algoritmiem? Laipni lūgts programmā!"
+    show dfs neutral at virslinijaspalabi with dissolve
+    d "Tagad izvēlies, kuru no mums, tu vēlies pirmo iemācīties!"
+    d "Es, DFS, mācīšu tev kā labāk apiet grafus un izvēlēties labāko ceļu, bet mans draugs, Greedy, mācīs par to, kā viņš izvēlas lokāli labāko variantu"
+
+    menu:
+        "Ko tu izvēlēsies?"
+
+        "Izvēlos DFS":
+            jump dfs
+        "Izvēlos Greedy":
+            jump greedy
+label dfs:
+    
+    scene bg parastais with fade
+    show dfs neutral at virslinijaspalabi
+    d "Laipni lūgts Dziļuma Pirma Meklēšanas pamācībā!!"
+    d "Dziļuma Pirmā Meklēšana jeb DFS ir algoritms, ko izmanto grafu datu struktūru pārlūkošanai vai meklēšanai."
+    d "DFS gadījumā mēs sākam no konkrēta mezgla un izpētām tik tālu, cik iespējams, pa katru zaru, pirms atgriežamies atpakaļ."
+    d "Apskatīsim piemēru ar grafu."
+
+    jump show_graph
+
+label show_graph:
+    scene bg parastais with fade
+    show graph with fade
+    d "Šeit ir grafiks. Katrs aplis ir mezgls, un līnijas savieno mezglus."
+    d "Ja tu esi pārliecināts sevī vari uzreiz nelielu jautājumu iziet, ja vēli gribi sīkāk uzzināt, tad paprasi man, es tev vēl sīkāk pamācīšu!"
+
+    menu:
+        "Paskaidro DFS soli pa solim":
+            jump dfs_steps
+        "Pārbaudīt zināšanas":
+            jump dfs_quiz
+
+label dfs_steps:
+    d "DFS mērķis ir izskatīt visus punktus, aizejot pa vienu ceļu līdz galam, un tad atgriežoties atpakaļ"
+    d "Mēs sākam no punkta viens, un kustamies uz nākamo, punktu 2 "
+    show graph with fade
+    d "No punkta 2 mēs dodamies uz 3, un redzam, ka tālāk nav kur doties. "
+    d "Tāpēc dodamies līdz pašam sākumam, no kurienes atkal veidojam tādus maršrutus, līdz paliek tikai strupceļi"
+   
+
+
+label dfs_quiz:
+    hide graph with fade
+    d "Tagad, pārbaudīsim tavas zināšanas! Pēc dotā grafika, kāda būtu pareizā DFS secība?"
+    show dfsuzde with dissolve 
+    menu dfsuzd:
+        "1,2,4,5,3,6,7":
+            d "Tava atbilde ir pareiza!"
+        "1,2,3,4,5,6,7":
+            d "Nepareizi, apdomā savu atbildi vēlreiz!"
+            jump dfsuzd
+        "1,2,6,7,5,4,3":
+            d "Nepareizi, padomā vēl!"
+            jump dfsuzd
+    
+
+    d "Malacis! Tu esi izpratis, kā darbojas DFS."
+
+
+    jump dfs_megagame
+
+
+label dfs_megagame:
+    hide bg parastais
+    hide dfs neutral
+    hide greedy happy
+    show karte
+    show nokerts:
+        subpixel True pos (0.92, 0.18) 
+
+    show zilaiskara:
+        subpixel True pos (0.42, 886) 
+
+    show sarkangob:
+        subpixel True pos (0.85, 0.24) 
+
+    show sarkangob1:
+        subpixel True pos (0.71, 0.17) 
+    show sarkangob2:
+        subpixel True pos (0.71, 0.24) 
+    show nokerts1:
+        subpixel True pos (0.62, 0.19) 
+    show nokerts2:
+        subpixel True pos (0.62, 0.24) 
+    show dubultgob:
+        subpixel True pos (0.4, 0.34) 
+    show 4loki:
+        subpixel True pos (0.41, 0.21) 
+
+    show bomba:
+        subpixel True pos (0.39, 0.28) 
+
+    d "Sveiks atkal!Tagad iedomājies ka tu esi bruņinieks, kurš grib kļūt apzeltīts. "
+    menu bruninieks:
+        "Izvēlies, uz kurieni dosies!"
+
+        "Pa labi":
+            show zilaiskara with move:
+                subpixel True pos (0.79, 0.38) 
+            "Kur iesi tālāk?"
+            menu palabi1:
+                "Tagad tev ir izvēle doties uz divām pusēm"
+
+                "Pa labi":
+                    hide zilaiskara
+                    show zilaiskarasit:
+                        subpixel True pos (0.81, 0.22)
+                    pause 0.5
+                    hide zilaiskarasit
+                    show zilaiskara:
+                        subpixel True pos (0.81, 0.22)
+                    pause 0.1
+                    hide sarkangob
+                    "Malacis, uzvarēji goblinu un jūs tagad esat divi!"
+                    hide zilaiskara
+                    hide nokerts
+                    show karaunham:
+                        subpixel True pos (0.79, 0.17) 
+
+
+                    menu atpakalpakreisi:
+                        "Kur dosies tagad?"
+
+                        "Atpakaļ":
+                            "Apdomā savu izvēli, varbūt vēlies iegūt papildspēkus?"
+                            jump atpakalpakreisi
+                        "Pa kreisi":
+                            "Jums sākas sīva cīņa"
+                            "Bet, tev sanāca viņus apiet un apmānīt! Tagad jūs jau esat četri!"
+                            hide karaunham
+                            pause 0.1
+                            show karaunhamsit:
+                                subpixel True pos (0.66, 0.19) 
+                            hide sarkangob1
+                            hide sarkangob2
+                            "Tagad tu dodies atpakaļ"
+                            hide karaunhamsit
+                            hide nokerts1
+                            hide nokerts2
+                            show gang:
+                                subpixel True pos (0.39, 666) 
+                            menu nodiviem:
+                                "Izvēlies iesi pa kreisi uzreiz pēc zelta, vai uz priekšu pēc papildspēkiem?"
+
+                                "Uz priekšu":
+                                    "Jūs redzat stiprus pretiniekus, un nolemjat, ka jāizmanto gudra taktika"
+                                    "Viens no jaunajiem karavīriem izrādās, ka māk taisīt TNT, ko jūs arī nolemjat izdarīt, un iemest pretiniekiem!"
+                                    show tnt with dissolve:
+                                        subpixel True pos (0.43, 446) 
+                                    "BOOOOM"
+                                    hide dubultgob
+                                    hide bomba
+                                    hide tnt with fade
+                                    "Tagad tev ir lokšāvēji! Izmantosim tos, lai nonestu torņus!"
+                                    "Jūs aizejat pie zelta, un sāk lidot bultas"
+                                    show 4loki:
+                                        subpixel True pos (0.03, 0.51)  
+                                    show gang:
+                                        subpixel True pos (0.15, 485) 
+                                    show lido:
+                                        subpixel True pos (-0.25, 0.15) 
+                                    "BOMBA"
+                                    show tilts:
+                                        subpixel True pos (0.08, 0.44) 
+                                    hide lido
+                                    "Kamēr loki šauda, visi goblini aizskrēja, tikmēr no torņa nokrita neliels gabals, pa kuru tu aizskrien līdz zeltam!"
+                                    "Apsveicu! Jūs tagad esat bagāti!"
+                                    show zelts:
+                                        subpixel True pos (0.11, 0.51) 
+                                    "Te ir tava godīgi nopelnīta nauda!"
+                                    jump completedd
+                                "Pa kreisi":
+                                    "Jūs ar komandu paskataties, un saprotat, ka nav iespējams tikt galā ar dotajiem torņiem"
+                                    jump nodiviem
+                "Pa kreisi":
+                    "Diemžēl tu nobīsties no monstriem"
+                    jump palabi1
+        "Uz priekšu":
+            "Tu redzi, ka tur ir daudz briesmīgu goblinu! Bet tu saproti, ka tur ir diezgan spēcīgi lokšāvēji, kuri noteikti noderētu....."
+            jump bruninieks
+        "Pa kreisi":
+            "Tu ieraugi goblinu torņus, un saproti ka tikt tur pagaidām nekā nesanāks."
+            jump bruninieks
+
+
+
+
+
+
+
+
+
+
+
+
+
+label greedy:
+    hide d with dissolve
+    scene bg parastais with fade
+    show greedy happy at virslinijaspakreisi
+    g "Sveiks! Es tev iemācīšu par Greedy algoritmu"
+    g "Visbiežāk Greedy algoritmu izskaidro ar klasisko monētu problēmu."
+
+    # Izskaidro problēmu
+    g "Tev ir dotas šādas monētu nominālvērtības: 1, 5, 10, 25, and 50."
+    g "Mērķis ir izmantot vismazāko monētu skaitu, lai sasniegtu noteiktu summu."
+
+    $ target_amount = 76
+    $ coins = [50, 25, 10, 5, 1]  
+    $ player_solution = []  
+    $ remaining_amount = target_amount
+
+    g "Tavs mērķis ir sasniegt [target_amount] centus. Redzēsim, vai vari to atrisināt!"
+
+    jump minigame
+
+label minigame:
+    menu:
+        "Pievienot 50 centus":
+            $ coin = 50
+            jump add_coin
+
+        "Pievienot 25 centus":
+            $ coin = 25
+            jump add_coin
+
+        "Pievienot 10 centus":
+            $ coin = 10
+            jump add_coin
+
+        "Pievienot 5 centus":
+            $ coin = 5
+            jump add_coin
+
+        "Pievienot 1 centu":
+            $ coin = 1
+            jump add_coin
+
+label add_coin:
+    if coin > remaining_amount:
+        g "Tā monēta ir pārāk liela! Mēģini pievienot mazāku monētu."
+    else:
+        $ player_solution.append(coin)
+        $ remaining_amount -= coin
+        if coin==1:
+            g"Tu pievienoji vienu centu. Atlikusī summa: [remaining_amount] centi."
+        else:
+            g "Tu pievienoji [coin] centus. Atlikusī summa: [remaining_amount] centi."
+
+    if remaining_amount == 0:
+        jump check_solution
+    else:
+        jump minigame
+
+label check_solution:
+    g "Lielisks darbs! Tu sasniedzi mērķa summu [target_amount] centi."
+    g "Pārbaudīsim, vai jūsu risinājums ir visefektīvākais."
+
+    python:
+        optimal_solution = []
+        temp_amount = target_amount
+        for c in coins:
+            while temp_amount >= c:
+                optimal_solution.append(c)
+                temp_amount -= c
+
+        player_coin_count = len(player_solution)
+        optimal_coin_count = len(optimal_solution)
+
+    g "Tu izmantoji [player_coin_count] monētas."
+    g "Greedy algoritms to spēja paveikt [optimal_coin_count] monētās."
+
+    if player_coin_count == optimal_coin_count:
+        g "Malacis! Tavs risinājums bija tikpat efektīvs kā Greedy"
+    else:
+        g "Labas pūles! Bet optimālais risinājums varētu izmantot mazāk monētu."
+        g "Šeit ir optimālais risinājums: [optimal_solution]."
+
+    jump greedysolution
+label greedysolution:
+    g "Tagad parādīšu kā to izdarītu Greedy algoritms"
+    python:
+        optimal_solution = []
+        temp_amount = target_amount
+        greedy_steps = []
+
+        for c in coins:
+            while temp_amount >= c:
+                optimal_solution.append(c)
+                temp_amount -= c
+                greedy_steps.append(f"Izmantoja {c}-centu monētu, Atlikušais skaits: {temp_amount} centi.")
+
+        optimal_coin_count = len(optimal_solution)
+
+    $ step_index = 0
+    while step_index < len(greedy_steps):
+        g "[greedy_steps[step_index]]"
+        $ step_index += 1
+    g "Visoptimālākais risinājums bija [optimal_coin_count] monētas:"
+    g "[optimal_solution]"
+    jump end_game
+label end_game:
+    g "Un tā darbojas Greedy algoritms"
+    g "Izdarot labākās vietējās izvēles, tas bieži vien atrod globāli efektīvu risinājumu."
+    g "Paldies un ceru, ka tu zini tagad, kas ir Greedy algoritms!"
+    jump completedg
+
+label completedg:
+    g "Tagad tu jau iemācījies par Greedy algoritmu, tad laiks iemācīties DFS jeb Depth-First Search"
+    g "Vai tu nevēlies iemācīties par DFS algoritmu?"
+    menu:
+        "Nē":
+            call renpy.full_restart()
+        "Jā":
+            jump dfs
+label completedd:
+    d "Tas tik bija ceļojums, vai ne?"
+    d "Gan iemācījies jaunu informāciju gan kļuvi bagāts!"
+    d "Vai tu nevēlies iemācīties par Greedy algoritmu?"
+    menu:
+        "Nē":
+            call renpy.full_restart()
+        "Jā":
+            jump greedy
+    return
