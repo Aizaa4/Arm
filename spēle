@@ -5,7 +5,7 @@ define virslinijaspalabi= Position(ypos=760,xalign=0.9)
 label start:
     camera:
         perspective True
-
+    play sound "audio/dziesma.mp3" loop
     scene bg parastais
     with fade
 
@@ -17,7 +17,7 @@ label start:
     d "Es, DFS, mācīšu tev kā labāk apiet grafus un izvēlēties labāko ceļu, bet mans draugs, Greedy, mācīs par to, kā viņš izvēlas lokāli labāko variantu"
 
     menu:
-        "Ko tu izvēlēsies?"
+        "Kuru tu izvēlēsies?"
 
         "Izvēlos DFS":
             jump dfs
@@ -269,8 +269,8 @@ label add_coin:
         jump minigame
 
 label check_solution:
-    g "Lielisks darbs! Tu sasniedzi mērķa summu [target_amount] centi."
-    g "Pārbaudīsim, vai jūsu risinājums ir visefektīvākais."
+    g "Lielisks paveikts darbs! Tu sasniedzi mērķa summu [target_amount] centi."
+    g "Pārbaudīsim, vai tavs risinājums ir visefektīvākais."
 
     python:
         optimal_solution = []
@@ -287,7 +287,7 @@ label check_solution:
     g "Greedy algoritms to spēja paveikt [optimal_coin_count] monētās."
 
     if player_coin_count == optimal_coin_count:
-        g "Malacis! Tavs risinājums bija tikpat efektīvs kā Greedy"
+        g "Malacis! Tavs risinājums bija tikpat efektīvs kā Greedy algoritmiem"
     else:
         g "Labas pūles! Bet optimālais risinājums varētu izmantot mazāk monētu."
         g "Šeit ir optimālais risinājums: [optimal_solution]."
