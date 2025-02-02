@@ -2,6 +2,16 @@ define g = Character("Greedy")
 define d = Character("DFS")
 define virslinijaspakreisi= Position(ypos=760,xalign=0.1)
 define virslinijaspalabi= Position(ypos=760,xalign=0.9)
+
+
+
+# Declare the game's main script
+# Declare the game's main script
+# Declare the game's main script
+# Declare the game's main script
+
+
+
 label start:
     camera:
         perspective True
@@ -23,6 +33,8 @@ label start:
             jump dfs
         "Izvēlos Greedy":
             jump greedy
+
+
 label dfs:
     
     scene bg parastais with fade
@@ -38,7 +50,7 @@ label show_graph:
     scene bg parastais with fade
     show graph with fade
     d "Šeit ir grafiks. Katrs aplis ir mezgls, un līnijas savieno mezglus."
-    d "Ja tu esi pārliecināts sevī vari uzreiz nelielu jautājumu iziet, ja vēli gribi sīkāk uzzināt, tad paprasi man, es tev vēl sīkāk pamācīšu!"
+    d "Ja tu esi pārliecināts sevī vari uzreiz nelielu jautājumu iziet, ja vēlies gribi sīkāk uzzināt, tad paprasi man, es tev vēl sīkāk pamācīšu!"
 
     menu:
         "Paskaidro DFS soli pa solim":
@@ -57,7 +69,7 @@ label dfs_steps:
 
 label dfs_quiz:
     hide graph with fade
-    d "Tagad, pārbaudīsim tavas zināšanas! Pēc dotā grafika, kāda būtu pareizā DFS secība?"
+    d "Tagad pārbaudīsim tavas zināšanas! Pēc dotā grafika, kāda būtu pareizā DFS secība?"
     show dfsuzde with dissolve 
     menu dfsuzd:
         "1,2,4,5,3,6,7":
@@ -159,8 +171,8 @@ label dfs_megagame:
                                 "Izvēlies iesi pa kreisi uzreiz pēc zelta, vai uz priekšu pēc papildspēkiem?"
 
                                 "Uz priekšu":
-                                    "Jūs redzat stiprus pretiniekus, un nolemjat, ka jāizmanto gudra taktika"
-                                    "Viens no jaunajiem karavīriem izrādās, ka māk taisīt TNT, ko jūs arī nolemjat izdarīt, un iemest pretiniekiem!"
+                                    "Jūs redzat stiprus pretiniekus un nolemjat, ka jāizmanto gudra taktika"
+                                    "Izrādās, ka viens no karavīriem māk taisīt bombas, kuras jūs arī nolemjat izveidot un iemest pretiniekiem!"
                                     show tnt with dissolve:
                                         subpixel True pos (0.43, 446) 
                                     "BOOOOM"
@@ -175,7 +187,7 @@ label dfs_megagame:
                                         subpixel True pos (0.15, 485) 
                                     show lido:
                                         subpixel True pos (-0.25, 0.15) 
-                                    "BOMBA"
+                                    "Bultas sāk lidot viena pēc otras"
                                     show tilts:
                                         subpixel True pos (0.08, 0.44) 
                                     hide lido
@@ -200,29 +212,19 @@ label dfs_megagame:
 
 
 
-
-
-
-
-
-
-
-
-
-
 label greedy:
-    hide d with dissolve
+    hide dfs neutral with dissolve
     scene bg parastais with fade
     show greedy happy at virslinijaspakreisi
     g "Sveiks! Es tev iemācīšu par Greedy algoritmu"
     g "Visbiežāk Greedy algoritmu izskaidro ar klasisko monētu problēmu."
 
     # Izskaidro problēmu
-    g "Tev ir dotas šādas monētu nominālvērtības: 1, 5, 10, 25, and 50."
+    g "Tev ir dotas šādas monētu nominālvērtības: 1, 5, 10, 20, un 50."
     g "Mērķis ir izmantot vismazāko monētu skaitu, lai sasniegtu noteiktu summu."
 
     $ target_amount = 76
-    $ coins = [50, 25, 10, 5, 1]  
+    $ coins = [50, 20, 10, 5, 1]  
     $ player_solution = []  
     $ remaining_amount = target_amount
 
@@ -236,12 +238,12 @@ label minigame:
             $ coin = 50
             jump add_coin
 
-        "Pievienot 25 centus":
-            $ coin = 25
-            jump add_coin
-
         "Pievienot 10 centus":
             $ coin = 10
+            jump add_coin
+
+        "Pievienot 20 centus":
+            $ coin = 20
             jump add_coin
 
         "Pievienot 5 centus":
@@ -314,7 +316,85 @@ label greedysolution:
         $ step_index += 1
     g "Visoptimālākais risinājums bija [optimal_coin_count] monētas:"
     g "[optimal_solution]"
-    jump end_game
+    jump greedy2
+
+label greedy2:
+    scene bg parastais
+    with fade
+
+
+
+    "Sveiks atkal, tagad iepazīsi Greedy algoritmus citā dzīves situācijā:Mugursomas problēmā"
+
+    "Iedomājies, ka esi dārgumu meklētājs ar somu, kas var izturēt tikai tik lielu svaru. Tev būs jāizvēlas visvērtīgākās lietas, vienlaikus nepārsniedzot somas svaru."
+
+    "Greedy algoritms darbojas, atlasot “vērtīgākās” preces, pamatojoties uz noteiktu kritēriju, piemēram, vērtības un svara attiecību, līdz soma ir pilna vai vairs nav piemērotas preces."
+
+
+    # Initialize variables
+    $ max_weight = 7
+    $ current_weight = 0
+    $ current_value = 0
+    $ items = [
+        {"name": "Grāmata", "weight": 2, "value": 10, "selected": False},
+        {"name": "Neliela lāde", "weight": 3, "value": 14, "selected": False},
+        {"name": "Monēta", "weight": 1, "value": 3, "selected": False},
+        {"name": "Zelta stienis", "weight": 5, "value": 20, "selected": False},
+    ]
+
+    # Show the interactive screen
+    call screen knapsack_screen
+
+    # After the player finishes
+    "Tu pabeidzi savu izvēli, tagad pārbaudīsim to!"
+
+    # Create a list of selected items and prepare text output
+    $ chosen_items = [item["name"] for item in items if item["selected"]]
+    $ chosen_items_text = ", ".join(chosen_items) if chosen_items else "No items"
+    $ optimal_solution = ["Trīs grāmatas", "1 monēta"]
+    $ optimal_value = 33
+
+    # Show the player's choices
+    "Kopējā priekšmetu vērtība ir [current_value] un smagums [current_weight]."
+
+    if sorted(chosen_items) == sorted(optimal_solution):
+        "Apsveicu! Tu izmantoji greedy pieeju un atradi optimālo risinājumu! Tavas somas kopējā vērtība ir [optimal_value]."
+    else:
+        "Labs mēģinājums! Optimālais risinājums bija izvēlēties vienumu A, vienumu B un vienumu C, lai iegūtu kopējo vērtību [optimal_value]."
+
+    "Tātad izrādās, ka lai gan grāmatas var nelikties tik vērtīgas, par savu smagumu tās ir diezgan svarīgas!"
+    jump completedg
+
+
+
+# Screen for interactive item selection
+screen knapsack_screen:
+    frame:
+        background "#020349"  # Tumšs fons
+        xpadding 20
+        ypadding 20
+        align (0.5, 0.5)
+        vbox:
+            text "{b}Tava soma{/b}"
+            text "Smagums: [current_weight] / [max_weight]"
+            text "Vērtība: [current_value]"
+            text "Nospied uz priekšmeta, lai to pievienotu."
+
+            # Loop through each item and display its details
+            for item in items:
+                hbox:
+                    text "[item['name']] (Smagums: [item['weight']], Vērtība: [item['value']])"
+                    if not item["selected"] and current_weight + item["weight"] <= max_weight:
+                        textbutton "Pievienot" action [SetField(item, "selected", True), 
+                                                SetVariable("current_weight", current_weight + item["weight"]),
+                                                SetVariable("current_value", current_value + item["value"])]
+                        textbutton "Noņemt" action [SetField(item, "selected", False), 
+                                                    SetVariable("current_weight", current_weight - item["weight"]),
+                                                    SetVariable("current_value", current_value - item["value"])]
+
+            # Button to finish the selection
+            textbutton "Pabeigt" action Return()
+return
 label end_game:
     g "Un tā darbojas Greedy algoritms"
     g "Izdarot labākās vietējās izvēles, tas bieži vien atrod globāli efektīvu risinājumu."
@@ -326,16 +406,16 @@ label completedg:
     g "Vai tu nevēlies iemācīties par DFS algoritmu?"
     menu:
         "Nē":
-            call renpy.full_restart()
+            $ renpy.full_restart()
         "Jā":
             jump dfs
 label completedd:
     d "Tas tik bija ceļojums, vai ne?"
-    d "Gan iemācījies jaunu informāciju gan kļuvi bagāts!"
+    d "Gan iemācījies jaunu informāciju, gan kļuvi bagāts!"
     d "Vai tu nevēlies iemācīties par Greedy algoritmu?"
     menu:
         "Nē":
-            call renpy.full_restart()
+            $ renpy.full_restart()
         "Jā":
             jump greedy
     return
